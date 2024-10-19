@@ -85,4 +85,4 @@ function toggleTheme() {
 }
 
 // Inicializa a página com a linguagem padrão (português)
-loadLanguage('pt-br');
+loadLanguage('eng');
