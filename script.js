@@ -6,7 +6,7 @@ const imageNames = [
 ];
 
 let currentIndex = 0;
-let currentLanguage = 'pt';  // Idioma padrão
+let currentLanguage = 'eng';  // Idioma padrão
 let langData = {};  // Objeto para armazenar os textos traduzidos
 
 // Função para carregar o arquivo JSON de linguagem
