@@ -6,10 +6,33 @@ const images = [
 ];
 
 let currentIndex = 0;
+let langData = {}; // Objeto para armazenar os textos traduzidos
+
+// Função para carregar o arquivo JSON de linguagem
+function loadLanguage(language) {
+  fetch(`Lang/${language}.json`)
+    .then(response => response.json())
+    .then(data => {
+      langData = data;
+      updateTexts();  // Atualiza os textos quando a linguagem é carregada
+    });
+}
+
+// Função para mudar a linguagem
+function changeLanguage(language) {
+  loadLanguage(language);
+}
+
+// Função para atualizar os textos na página
+function updateTexts() {
+  document.getElementById('prev-button').textContent = langData.previous;
+  document.getElementById('next-button').textContent = langData.next;
+  updatePageNumber();  // Atualiza o número da página com os textos novos
+}
 
 // Função para atualizar o número da página
 function updatePageNumber() {
-  document.getElementById('page-number').textContent = `Página ${currentIndex + 1}`;
+  document.getElementById('page-number').textContent = `${langData.page} ${currentIndex + 1} ${langData.of} ${images.length}`;
 }
 
 // Função para mudar a imagem
@@ -44,5 +67,5 @@ function toggleTheme() {
   }
 }
 
-// Atualiza a página inicial
-updatePageNumber();
+// Inicializa a página com a linguagem padrão (português)
+loadLanguage('pt-br');
