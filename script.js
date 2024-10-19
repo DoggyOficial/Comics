@@ -1,20 +1,23 @@
-// Lista de imagens dentro da pasta "The Comics"
-const images = [
-  'The Comics/comic1.png',
-  'The Comics/comic2.png',
-  'The Comics/comic3.png'
+// Lista de imagens (nomes)
+const imageNames = [
+  'comic1.png',
+  'comic2.png',
+  'comic3.png'
 ];
 
 let currentIndex = 0;
-let langData = {}; // Objeto para armazenar os textos traduzidos
+let currentLanguage = 'pt';  // Idioma padrão
+let langData = {};  // Objeto para armazenar os textos traduzidos
 
 // Função para carregar o arquivo JSON de linguagem
 function loadLanguage(language) {
+  currentLanguage = language;  // Atualiza a linguagem atual
   fetch(`Lang/${language}.json`)
     .then(response => response.json())
     .then(data => {
       langData = data;
       updateTexts();  // Atualiza os textos quando a linguagem é carregada
+      updateImage();  // Atualiza as imagens para o idioma selecionado
     });
 }
 
@@ -33,15 +36,22 @@ function updateTexts() {
 
 // Função para atualizar o número da página
 function updatePageNumber() {
-  document.getElementById('page-number').textContent = `${langData.page} ${currentIndex + 1} ${langData.of} ${images.length}`;
+  document.getElementById('page-number').textContent = `${langData.page} ${currentIndex + 1} ${langData.of} ${imageNames.length}`;
 }
 
 // Função para mudar a imagem
 function changeImage(direction) {
   currentIndex += direction;
 
+  // Verifica se o índice está dentro do limite
+  if (currentIndex < 0) {
+    currentIndex = 0;
+  } else if (currentIndex >= imageNames.length) {
+    currentIndex = imageNames.length - 1;
+  }
+
   // Atualiza a imagem
-  document.getElementById('comic-image').src = images[currentIndex];
+  updateImage();
 
   // Atualiza o número da página
   updatePageNumber();
@@ -50,7 +60,13 @@ function changeImage(direction) {
   document.getElementById('prev-button').disabled = currentIndex === 0;
 
   // Desabilita o botão "Próximo" se estivermos na última imagem
-  document.getElementById('next-button').disabled = currentIndex === images.length - 1;
+  document.getElementById('next-button').disabled = currentIndex === imageNames.length - 1;
+}
+
+// Função para atualizar a imagem de acordo com a linguagem
+function updateImage() {
+  const imagePath = `The Comics/${currentLanguage}/${imageNames[currentIndex]}`;
+  document.getElementById('comic-image').src = imagePath;
 }
 
 // Função para alternar entre modo claro e escuro
@@ -69,4 +85,4 @@ function toggleTheme() {
 }
 
 // Inicializa a página com a linguagem padrão (português)
-loadLanguage('pt');
+loadLanguage('pt-br');
