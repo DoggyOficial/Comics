@@ -65,26 +65,30 @@
       position: absolute;
       top: 10px;
       right: 20px;
-      padding: 10px 20px;
-      background-color: var(--text-color);
-      color: var(--bg-color);
+      padding: 10px;
+      background-color: transparent;
       border: none;
+      font-size: 24px;
       cursor: pointer;
-      font-size: 16px;
-      transition: background-color 0.3s, color 0.3s;
+      transition: color 0.3s;
+      color: var(--text-color);
+    }
+
+    .mode-toggle:focus {
+      outline: none;
     }
   </style>
 </head>
 <body>
 
-  <button class="mode-toggle" onclick="toggleTheme()">Modo Escuro</button>
+  <button class="mode-toggle" onclick="toggleTheme()">🌙</button>
 
   <div class="header">
     <h1>Comiks</h1>
   </div>
 
   <div class="comic-container">
-    <img id="comic-image" src="The Comics/1.png" alt="Webcomic">
+    <img id="comic-image" src="The Comics/comic1.png" alt="Webcomic">
   </div>
 
   <div class="nav-buttons">
@@ -95,9 +99,9 @@
   <script>
     // Lista de imagens dentro da pasta "The Comics"
     const images = [
-      'The Comics/1.png',
-      'The Comics/2.png',
-      'The Comics/3.png'
+      'The Comics/comic1.png',
+      'The Comics/comic2.png',
+      'The Comics/comic3.png'
     ];
 
     let currentIndex = 0;
@@ -120,13 +124,14 @@
     function toggleTheme() {
       const body = document.body;
       const currentTheme = body.getAttribute('data-theme');
+      const modeToggle = document.querySelector('.mode-toggle');
 
       if (currentTheme === 'dark') {
         body.removeAttribute('data-theme');
-        document.querySelector('.mode-toggle').textContent = 'Modo Escuro';
+        modeToggle.textContent = '🌙'; // Lua para modo escuro
       } else {
         body.setAttribute('data-theme', 'dark');
-        document.querySelector('.mode-toggle').textContent = 'Modo Claro';
+        modeToggle.textContent = '☀️'; // Sol para modo claro
       }
     }
   </script>
