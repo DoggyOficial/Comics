@@ -24,6 +24,22 @@
       max-width: 100%;
       height: auto;
     }
+    .nav-buttons {
+      margin-top: 20px;
+    }
+    button {
+      padding: 10px 20px;
+      margin: 10px;
+      background-color: #333;
+      color: white;
+      border: none;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    button:disabled {
+      background-color: #aaa;
+      cursor: not-allowed;
+    }
   </style>
 </head>
 <body>
@@ -34,9 +50,40 @@
   </div>
 
   <div class="comic-container">
-    <h2>Capítulo 1: Título do Capítulo</h2>
-    <img src="link-para-sua-imagem.png" alt="Webcomic Capítulo 1">
+    <h2 id="comic-title">Capítulo 1</h2>
+    <img id="comic-image" src="The Comics/img1.png" alt="Webcomic Capítulo 1">
   </div>
+
+  <div class="nav-buttons">
+    <button id="prev-button" onclick="changeImage(-1)" disabled>Anterior</button>
+    <button id="next-button" onclick="changeImage(1)">Próximo</button>
+  </div>
+
+  <script>
+    // Lista de imagens dentro da pasta "The Comics"
+    const images = [
+      'The Comics/1.png',
+      'The Comics/2.png',
+      'The Comics/3.png'
+    ];
+
+    let currentIndex = 0;
+
+    // Função para mudar a imagem
+    function changeImage(direction) {
+      currentIndex += direction;
+
+      // Atualiza a imagem e o título
+      document.getElementById('comic-image').src = images[currentIndex];
+      document.getElementById('comic-title').textContent = `Capítulo ${currentIndex + 1}`;
+
+      // Desabilita o botão "Anterior" se estivermos na primeira imagem
+      document.getElementById('prev-button').disabled = currentIndex === 0;
+
+      // Desabilita o botão "Próximo" se estivermos na última imagem
+      document.getElementById('next-button').disabled = currentIndex === images.length - 1;
+    }
+  </script>
 
 </body>
 </html>
