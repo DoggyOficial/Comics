@@ -3,55 +3,88 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Minha Webcomic</title>
+  <title>Comiks</title>
   <style>
     body {
       font-family: Arial, sans-serif;
-      background-color: #f0f0f0;
+      background-color: var(--bg-color);
+      color: var(--text-color);
       margin: 0;
       padding: 20px;
       text-align: center;
+      transition: background-color 0.3s, color 0.3s;
     }
+
+    :root {
+      --bg-color: #f0f0f0;
+      --text-color: #333;
+    }
+
+    [data-theme="dark"] {
+      --bg-color: #333;
+      --text-color: #f0f0f0;
+    }
+
     .header {
-      background-color: #333;
-      color: white;
+      background-color: var(--text-color);
+      color: var(--bg-color);
       padding: 15px;
+      transition: background-color 0.3s, color 0.3s;
     }
+
     .comic-container {
       margin-top: 20px;
     }
+
     img {
       max-width: 100%;
       height: auto;
     }
+
     .nav-buttons {
       margin-top: 20px;
     }
+
     button {
       padding: 10px 20px;
       margin: 10px;
-      background-color: #333;
-      color: white;
+      background-color: var(--text-color);
+      color: var(--bg-color);
       border: none;
       cursor: pointer;
       font-size: 16px;
+      transition: background-color 0.3s, color 0.3s;
     }
+
     button:disabled {
       background-color: #aaa;
       cursor: not-allowed;
+    }
+
+    .mode-toggle {
+      position: absolute;
+      top: 10px;
+      right: 20px;
+      padding: 10px 20px;
+      background-color: var(--text-color);
+      color: var(--bg-color);
+      border: none;
+      cursor: pointer;
+      font-size: 16px;
+      transition: background-color 0.3s, color 0.3s;
     }
   </style>
 </head>
 <body>
 
+  <button class="mode-toggle" onclick="toggleTheme()">Modo Escuro</button>
+
   <div class="header">
-    <h1>Minha Webcomic</h1>
-    <p>Um novo capítulo toda semana!</p>
+    <h1>Comiks</h1>
   </div>
 
   <div class="comic-container">
-    <h2 id="comic-title">Capítulo 1</h2>
-    <img id="comic-image" src="The Comics/img1.png" alt="Webcomic Capítulo 1">
+    <img id="comic-image" src="The Comics/1.png" alt="Webcomic">
   </div>
 
   <div class="nav-buttons">
@@ -73,15 +106,28 @@
     function changeImage(direction) {
       currentIndex += direction;
 
-      // Atualiza a imagem e o título
+      // Atualiza a imagem
       document.getElementById('comic-image').src = images[currentIndex];
-      document.getElementById('comic-title').textContent = `Capítulo ${currentIndex + 1}`;
 
       // Desabilita o botão "Anterior" se estivermos na primeira imagem
       document.getElementById('prev-button').disabled = currentIndex === 0;
 
       // Desabilita o botão "Próximo" se estivermos na última imagem
       document.getElementById('next-button').disabled = currentIndex === images.length - 1;
+    }
+
+    // Função para alternar entre modo claro e escuro
+    function toggleTheme() {
+      const body = document.body;
+      const currentTheme = body.getAttribute('data-theme');
+
+      if (currentTheme === 'dark') {
+        body.removeAttribute('data-theme');
+        document.querySelector('.mode-toggle').textContent = 'Modo Escuro';
+      } else {
+        body.setAttribute('data-theme', 'dark');
+        document.querySelector('.mode-toggle').textContent = 'Modo Claro';
+      }
     }
   </script>
 
