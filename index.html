@@ -12,6 +12,13 @@
 
   <div class="header">
     <h1>Comiks</h1>
+    <div class="language-select">
+      <label for="language">Língua:</label>
+      <select id="language">
+        <option value="pt">Português</option>
+        <option value="en">Inglês</option>
+      </select>
+    </div>
   </div>
 
   <div class="comic-container">
@@ -20,6 +27,7 @@
 
   <div class="nav-buttons">
     <button id="prev-button" onclick="changeImage(-1)" disabled>Anterior</button>
+    <span id="page-number">Página 1</span>
     <button id="next-button" onclick="changeImage(1)">Próximo</button>
   </div>
 
