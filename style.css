@@ -22,7 +22,14 @@ body {
   background-color: var(--text-color);
   color: var(--bg-color);
   padding: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   transition: background-color 0.3s, color 0.3s;
+}
+
+.language-select {
+  font-size: 16px;
 }
 
 .comic-container {
@@ -52,6 +59,11 @@ button {
 button:disabled {
   background-color: #aaa;
   cursor: not-allowed;
+}
+
+span#page-number {
+  font-size: 18px;
+  margin: 0 20px;
 }
 
 .mode-toggle {
