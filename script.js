@@ -27,6 +27,7 @@ function changeLanguage(language) {
 function updateTexts() {
   document.getElementById('prev-button').textContent = langData.previous;
   document.getElementById('next-button').textContent = langData.next;
+  document.getElementById('language-label').textContent = `${langData.language}:`;
   updatePageNumber();  // Atualiza o número da página com os textos novos
 }
 
@@ -68,4 +69,4 @@ function toggleTheme() {
 }
 
 // Inicializa a página com a linguagem padrão (português)
-loadLanguage('pt-br');
+loadLanguage('pt');
