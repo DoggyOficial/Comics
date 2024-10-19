@@ -7,12 +7,20 @@ const images = [
 
 let currentIndex = 0;
 
+// Função para atualizar o número da página
+function updatePageNumber() {
+  document.getElementById('page-number').textContent = `Página ${currentIndex + 1}`;
+}
+
 // Função para mudar a imagem
 function changeImage(direction) {
   currentIndex += direction;
 
   // Atualiza a imagem
   document.getElementById('comic-image').src = images[currentIndex];
+
+  // Atualiza o número da página
+  updatePageNumber();
 
   // Desabilita o botão "Anterior" se estivermos na primeira imagem
   document.getElementById('prev-button').disabled = currentIndex === 0;
@@ -35,3 +43,6 @@ function toggleTheme() {
     modeToggle.textContent = '☀️'; // Sol para modo claro
   }
 }
+
+// Atualiza a página inicial
+updatePageNumber();
